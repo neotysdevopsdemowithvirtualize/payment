@@ -5,8 +5,8 @@ services:
         image: TAG_TO_REPLACE
         hostname: payment
         restart: always
-		environment:
-			- DT_CUSTOM_PROP=app=payment,environment=dev
+        environment:
+		  - DT_CUSTOM_PROP=app=payment,environment=dev
         cap_drop:
             - all
         cap_add:
