@@ -6,7 +6,7 @@ services:
         hostname: payment
         restart: always
         environment:
-		  - DT_CUSTOM_PROP=app=payment,environment=dev
+          - DT_CUSTOM_PROP=app=payment,environment=dev
         cap_drop:
             - all
         cap_add:
