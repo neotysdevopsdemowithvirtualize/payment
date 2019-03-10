@@ -2,12 +2,11 @@ version: '2'
 
 services:
     payment:
-        build: 
-            context: .
-            dockerfile: docker/payment/Dockerfile
-        image: weaveworksdemos/payment
+        image: TAG_TO_REPLACE
         hostname: payment
         restart: always
+		environment:
+			- DT_CUSTOM_PROP=app=payment,environment=dev
         cap_drop:
             - all
         cap_add:
