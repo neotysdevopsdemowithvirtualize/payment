@@ -41,11 +41,12 @@ pipeline {
 
      
            mkdir -p src/github.com/neotysdevopsdemo/payment/
-           go get -v github.com/Masterminds/glide
            cp -R ./api src/github.com/neotysdevopsdemo/payment/
            cp -R ./main.go src/github.com/neotysdevopsdemo/payment/
            cp -R ./glide.* src/github.com/neotysdevopsdemo/payment/
            cd src/github.com/neotysdevopsdemo/payment
+           go get -v github.com/Masterminds/glide
+          
            
          
           '''
