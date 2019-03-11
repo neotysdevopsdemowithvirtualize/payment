@@ -116,7 +116,7 @@ pipeline {
         sh "sed -i 's/CHECK_TO_REPLACE/${BASICCHECKURI}/'  $WORKSPACE/test/neoload/payment_neoload.yaml"
         sh "sed -i 's/PAYMENT_TO_REPLACE/${PAYMENTURI}/'  $WORKSPACE/test/neoload/payment_neoload.yaml"
         sh "sed -i 's/HOST_TO_REPLACE/${env.APP_NAME}/'  $WORKSPACE/test/neoload/payment_neoload.yaml"
-        sh "sed -i 's/PORT_TO_REPLACE/8086/' $WORKSPACE/test/neoload/payment_neoload.yaml"
+        sh "sed -i 's/PORT_TO_REPLACE/80/' $WORKSPACE/test/neoload/payment_neoload.yaml"
         sh "sed -i 's/DTID_TO_REPLACE/${DYNATRACEID}/'  $WORKSPACE/test/neoload/payment_neoload.yaml"
         sh "sed -i 's/APIKEY_TO_REPLACE/${DYNATRACEAPIKEY}/'  $WORKSPACE/test/neoload/payment_neoload.yaml"
         sh "sed -i 's,JSONFILE_TO_REPLACE,$WORKSPACE/monspec/payment_anomalieDection.json,'  $WORKSPACE/test/neoload/payment_neoload.yaml"
@@ -129,7 +129,7 @@ pipeline {
                       project: "$WORKSPACE/test/neoload/load_template/load_template.nlp",
                       testName: 'HealthCheck_payment_${VERSION}_${BUILD_NUMBER}',
                       testDescription: 'HealthCheck_payment_${VERSION}_${BUILD_NUMBER}',
-                      commandLineOption: "-project $WORKSPACE/test/neoload/payment_neoload.yaml -nlweb -loadGenerators $WORKSPACE/infrastructure/infrastructure/neoload/lg/lg.yaml -nlwebToken $NLAPIKEY -variables host=${env.APP_NAME},port=8086",
+                      commandLineOption: "-project $WORKSPACE/test/neoload/payment_neoload.yaml -nlweb -loadGenerators $WORKSPACE/infrastructure/infrastructure/neoload/lg/lg.yaml -nlwebToken $NLAPIKEY -variables host=${env.APP_NAME},port=80",
                       scenario: 'BasicCheck', sharedLicense: [server: 'NeoLoad Demo License', duration: 2, vuCount: 200],
                       trendGraphs: [
                               [name: 'Limit test Catalogue API Response time', curve: ['CatalogueList>Actions>Get Catalogue List'], statistic: 'average'],
@@ -153,7 +153,7 @@ pipeline {
                           project: "$WORKSPACE/test/neoload/load_template/load_template.nlp",
                           testName: 'DynatraceSanityCheck_payment_${VERSION}_${BUILD_NUMBER}',
                           testDescription: 'DynatraceSanityCheck_Payment_${VERSION}_${BUILD_NUMBER}',
-                          commandLineOption: "-project $WORKSPACE/test/neoload/payment_neoload.yaml -nlweb -loadGenerators $WORKSPACE/infrastructure/infrastructure/neoload/lg/lg.yaml -variables host=${env.APP_NAME},port=8086 -nlwebToken $NLAPIKEY ",
+                          commandLineOption: "-project $WORKSPACE/test/neoload/payment_neoload.yaml -nlweb -loadGenerators $WORKSPACE/infrastructure/infrastructure/neoload/lg/lg.yaml -variables host=${env.APP_NAME},port=80 -nlwebToken $NLAPIKEY ",
                           scenario: 'DYNATRACE_SANITYCHECK', sharedLicense: [server: 'NeoLoad Demo License', duration: 2, vuCount: 200],
                           trendGraphs: [
                                   [name: 'Limit test Catalogue API Response time', curve: ['CatalogueList>Actions>Get Catalogue List'], statistic: 'average'],
@@ -168,8 +168,8 @@ pipeline {
                   sh "git config remote.origin.url https://github.com/${env.GITHUB_ORGANIZATION}/payment"
                   sh "git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*"
                   sh "git config remote.origin.url https://github.com/${env.GITHUB_ORGANIZATION}/payment"
-                  sh "git add $WORKSPACE/infrastructure/sanitycheck.json"
-                  sh "git commit -m 'Update Sanity_Check_${BUILD_NUMBER} ${env.APP_NAME} '"
+              //    sh "git add $WORKSPACE/infrastructure/sanitycheck.json"
+                //  sh "git commit -m 'Update Sanity_Check_${BUILD_NUMBER} ${env.APP_NAME} '"
                   //  sh "git pull -r origin master"
                   //#TODO handle this exeption
                   // sh "git push origin HEAD:master"
@@ -191,7 +191,7 @@ pipeline {
                       project: "$WORKSPACE/test/neoload/load_template/load_template.nlp",
                       testName: 'FuncCheck_payment_${VERSION}_${BUILD_NUMBER}',
                       testDescription: 'FuncCheck_payment_${VERSION}_${BUILD_NUMBER}',
-                      commandLineOption: "-project  $WORKSPACE/test/neoload/payment_neoload.yaml -nlweb -loadGenerators $WORKSPACE/infrastructure/infrastructure/neoload/lg/lg.yaml -nlwebToken $NLAPIKEY -variables host=payment,port=8086",
+                      commandLineOption: "-project  $WORKSPACE/test/neoload/payment_neoload.yaml -nlweb -loadGenerators $WORKSPACE/infrastructure/infrastructure/neoload/lg/lg.yaml -nlwebToken $NLAPIKEY -variables host=payment,port=80",
                       scenario: 'paymentLoad', sharedLicense: [server: 'NeoLoad Demo License', duration: 2, vuCount: 200],
                       trendGraphs: [
                               [name: 'Limit test Catalogue API Response time', curve: ['CatalogueList>Actions>Get Catalogue List'], statistic: 'average'],
