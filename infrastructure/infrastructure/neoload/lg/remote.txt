@@ -1,1 +1,1 @@
-nl-lg-payment.cicd-neotys.svc
+docker-lg1
